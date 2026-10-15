@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="720" height="405" viewBox="0 0 720 405">
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0c1a3d"/>
+      <stop offset="55%" stop-color="#123c78"/>
+      <stop offset="100%" stop-color="#38bdf8"/>
+    </linearGradient>
+  </defs>
+  <rect width="720" height="405" fill="url(#g)"/>
+  <circle cx="610" cy="90" r="130" fill="#ffffff" opacity="0.06"/>
+  <circle cx="100" cy="330" r="95" fill="#ffffff" opacity="0.05"/>
+  <text x="60" y="205" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="58" font-weight="700" fill="#ffffff">Faraway Admin</text>
+  <text x="62" y="250" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="24" fill="#bfe3fb">Yacht charter admin panel</text>
+  <text x="62" y="290" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="18" fill="#8cc8ef">Next.js · TypeScript · Tailwind CSS</text>
+</svg>
