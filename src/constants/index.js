@@ -21,6 +21,11 @@ import {
     AuraCover,
     Decorum,
     ElectricLove,
+    AuraCoverVideo,
+    DecorumVideo,
+    ElectricLoveVideo,
+    InsightFlowVideo,
+    LittleLuxuriesVideo,
     threejs,
   } from "../assets";
 
@@ -152,6 +157,7 @@ import {
         { name: "serverless", color: "pink-text-gradient" },
       ],
       image: AuraCover,
+      video: AuraCoverVideo,
       live_demo_link: "https://aura-cover-prod.vercel.app",
     },
     {
@@ -164,6 +170,7 @@ import {
         { name: "payments", color: "pink-text-gradient" },
       ],
       image: Decorum,
+      video: DecorumVideo,
       live_demo_link: "https://refunds.decorumvending.co.uk",
     },
     {
@@ -176,6 +183,7 @@ import {
         { name: "saas", color: "pink-text-gradient" },
       ],
       image: ElectricLove,
+      video: ElectricLoveVideo,
       live_demo_link: "https://goelectriclove.com",
     },
     {
@@ -188,6 +196,7 @@ import {
         { name: "vercel", color: "pink-text-gradient" },
       ],
       image: InsightFlow,
+      video: InsightFlowVideo,
       source_code_link: "https://github.com/jahanzaib0013-a11y/InsightFlow",
       live_demo_link: "https://insight-flow-ruby.vercel.app",
     },
@@ -201,6 +210,7 @@ import {
         { name: "e-commerce", color: "pink-text-gradient" },
       ],
       image: LittleLuxuries,
+      video: LittleLuxuriesVideo,
       source_code_link: "https://github.com/jahanzaib0013-a11y/LittleLuxuries",
       live_demo_link: "https://little-luxuries.vercel.app",
     },

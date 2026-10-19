@@ -27,11 +27,16 @@ import postgresql from "./tech/postgresql-original.svg";
 import NextUp from "./nextup.svg";
 import LiquidDMS from "./liquiddms.svg";
 import Faraway from "./faraway.svg";
-import InsightFlow from "./insightflow.svg";
-import LittleLuxuries from "./littleluxuries.svg";
-import AuraCover from "./auracover.svg";
-import Decorum from "./decorum.svg";
-import ElectricLove from "./electriclove.svg";
+import InsightFlow from "./thumbs/insightflow.png";
+import LittleLuxuries from "./thumbs/littleluxuries.png";
+import AuraCover from "./thumbs/auracover.png";
+import Decorum from "./thumbs/decorum.png";
+import ElectricLove from "./thumbs/electriclove.png";
+import AuraCoverVideo from "./videos/auracover.webm";
+import DecorumVideo from "./videos/decorum.webm";
+import ElectricLoveVideo from "./videos/electriclove.webm";
+import InsightFlowVideo from "./videos/insightflow.webm";
+import LittleLuxuriesVideo from "./videos/littleluxuries.webm";
 
 
 
@@ -73,6 +78,11 @@ export {
   AuraCover,
   Decorum,
   ElectricLove,
+  AuraCoverVideo,
+  DecorumVideo,
+  ElectricLoveVideo,
+  InsightFlowVideo,
+  LittleLuxuriesVideo,
   Wave,
   CodeXspaces,
   Chess,
