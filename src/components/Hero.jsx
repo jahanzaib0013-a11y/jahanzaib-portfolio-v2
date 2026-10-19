@@ -22,7 +22,7 @@ const Hero = () => {
 
 
             <p className={`${styles.heroSubText} mt-2 text-white-100`}>
-            Full-Stack Developer<br className='sm:block hidden'/> building modern web apps with<br className='sm:block hidden'/> Next.js, TypeScript &amp; the MERN stack.
+            Full Stack AI Developer<br className='sm:block hidden'/> building AI-powered web apps with<br className='sm:block hidden'/> Next.js, TypeScript &amp; Node.js.
 
             </p>
           </div>

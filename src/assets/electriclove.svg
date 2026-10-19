@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="720" height="405" viewBox="0 0 720 405">
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#1c0505"/>
+      <stop offset="55%" stop-color="#7f1d1d"/>
+      <stop offset="100%" stop-color="#f87171"/>
+    </linearGradient>
+  </defs>
+  <rect width="720" height="405" fill="url(#g)"/>
+  <circle cx="610" cy="100" r="130" fill="#ffffff" opacity="0.06"/>
+  <circle cx="100" cy="330" r="95" fill="#ffffff" opacity="0.05"/>
+  <text x="60" y="195" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="58" font-weight="700" fill="#ffffff">Electric Love</text>
+  <text x="62" y="242" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="24" fill="#fcd5d5">Fleet-management SaaS · 40 Teslas</text>
+  <text x="62" y="282" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="18" fill="#eda3a3">Vehicle APIs · Operations dashboard</text>
+</svg>

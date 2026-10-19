@@ -27,6 +27,11 @@ import postgresql from "./tech/postgresql-original.svg";
 import NextUp from "./nextup.svg";
 import LiquidDMS from "./liquiddms.svg";
 import Faraway from "./faraway.svg";
+import InsightFlow from "./insightflow.svg";
+import LittleLuxuries from "./littleluxuries.svg";
+import AuraCover from "./auracover.svg";
+import Decorum from "./decorum.svg";
+import ElectricLove from "./electriclove.svg";
 
 
 
@@ -63,6 +68,11 @@ export {
   NextUp,
   LiquidDMS,
   Faraway,
+  InsightFlow,
+  LittleLuxuries,
+  AuraCover,
+  Decorum,
+  ElectricLove,
   Wave,
   CodeXspaces,
   Chess,

@@ -4,9 +4,6 @@ import {
     creator,
     web,
     javascript,
-    Freely,
-    html,
-    css,
     reactjs,
     redux,
     tailwind,
@@ -19,12 +16,11 @@ import {
     nextjs,
     express,
     postgresql,
-    NextUp,
-    LiquidDMS,
-    Faraway,
-    Wave,
-    CodeXspaces,
-    Chess,
+    InsightFlow,
+    LittleLuxuries,
+    AuraCover,
+    Decorum,
+    ElectricLove,
     threejs,
   } from "../assets";
 
@@ -49,7 +45,7 @@ import {
       icon: web,
     },
     {
-      title: "Next.js & React Developer",
+      title: "AI & LLM Integrations",
       icon: mobile,
     },
     {
@@ -57,7 +53,7 @@ import {
       icon: backend,
     },
     {
-      title: "MERN Stack Developer",
+      title: "Next.js & React Developer",
       icon: creator,
     },
   ];
@@ -147,130 +143,66 @@ import {
 
   const projects = [
     {
-      name: "NextUp",
+      name: "AuraCover",
       description:
-        "A modern productivity platform for planning and tracking work, built with Next.js and TypeScript. Features a clean, responsive UI, secure authentication, and a MongoDB-backed API for real-time task management.",
+        "AI-powered SaaS generating custom cover content — serving 1,200+ AI generations per month in production. Next.js front-end, serverless API layer, and LLM integration with prompt engineering for consistent structured output.",
       tags: [
-        {
-          name: "nextjs",
-          color: "blue-text-gradient",
-        },
-        {
-          name: "typescript",
-          color: "green-text-gradient",
-        },
-        {
-          name: "mongodb",
-          color: "pink-text-gradient",
-        },
+        { name: "nextjs", color: "blue-text-gradient" },
+        { name: "ai-llm", color: "green-text-gradient" },
+        { name: "serverless", color: "pink-text-gradient" },
       ],
-      image: NextUp,
-      source_code_link: "https://github.com/jahanzaib0013-a11y/nextup",
+      image: AuraCover,
+      live_demo_link: "https://aura-cover-prod.vercel.app",
     },
     {
-      name: "Liquid DMS",
+      name: "Decorum Vending",
       description:
-        "A full dealer management system covering vehicle inventory, vendors, customers, and sales workflows. I built the backend REST API with Node.js, Express, and MongoDB — including authentication, role-based access, and PDF document generation.",
+        "Payment-events ingestion pipeline (Nayax \u2192 AWS SQS \u2192 Lambda \u2192 Supabase Postgres) with penny-exact transaction reconciliation across 360+ transactions. Integrated Nayax, NMI, and Payter payment terminals, hardened with dead-letter queues and batch failure handling.",
       tags: [
-        {
-          name: "nodejs",
-          color: "blue-text-gradient",
-        },
-        {
-          name: "express",
-          color: "green-text-gradient",
-        },
-        {
-          name: "mongodb",
-          color: "pink-text-gradient",
-        },
+        { name: "aws", color: "blue-text-gradient" },
+        { name: "supabase", color: "green-text-gradient" },
+        { name: "payments", color: "pink-text-gradient" },
       ],
-      image: LiquidDMS,
-      source_code_link: "https://github.com/jahanzaib0013-a11y/Liquid-DMS",
+      image: Decorum,
+      live_demo_link: "https://refunds.decorumvending.co.uk",
     },
     {
-      name: "Faraway Admin Panel",
+      name: "Electric Love",
       description:
-        "An admin dashboard for a yacht charter business — managing bookings, boats, and content through a fast, type-safe interface built with Next.js, TypeScript, and Tailwind CSS.",
+        "Fleet-management SaaS platform managing a 40-vehicle Tesla fleet \u2014 integrating vehicle APIs with a custom operations dashboard for real-time fleet oversight.",
       tags: [
-        {
-          name: "nextjs",
-          color: "blue-text-gradient",
-        },
-        {
-          name: "typescript",
-          color: "green-text-gradient",
-        },
-        {
-          name: "tailwind",
-          color: "pink-text-gradient",
-        },
+        { name: "react", color: "blue-text-gradient" },
+        { name: "vehicle-apis", color: "green-text-gradient" },
+        { name: "saas", color: "pink-text-gradient" },
       ],
-      image: Faraway,
-      source_code_link: "https://github.com/jahanzaib0013-a11y/faraway-admin-panel",
+      image: ElectricLove,
+      live_demo_link: "https://goelectriclove.com",
     },
     {
-      name: "Wave",
+      name: "InsightFlow",
       description:
-        "A social platform to share moments and connect with friends — like, comment, share posts, and follow your favorite creators. Built on the MERN stack with a Tailwind CSS interface.",
+        "An analytics and insights dashboard that turns raw data into clear, actionable visualizations. Built with Next.js and TypeScript, deployed live on Vercel.",
       tags: [
-        {
-          name: "react",
-          color: "blue-text-gradient",
-        },
-        {
-          name: "mongodb",
-          color: "green-text-gradient",
-        },
-        {
-          name: "tailwind",
-          color: "pink-text-gradient",
-        },
+        { name: "nextjs", color: "blue-text-gradient" },
+        { name: "typescript", color: "green-text-gradient" },
+        { name: "vercel", color: "pink-text-gradient" },
       ],
-      image: Wave,
-      source_code_link: "https://github.com/jahan-code/Wave",
+      image: InsightFlow,
+      source_code_link: "https://github.com/jahanzaib0013-a11y/InsightFlow",
+      live_demo_link: "https://insight-flow-ruby.vercel.app",
     },
     {
-      name: "CodeXspaces",
+      name: "Little Luxuries",
       description:
-        "A collaborative coding environment for solo developers and teams — real-time code collaboration powered by Socket.io with an intuitive workspace UI.",
+        "A boutique e-commerce storefront with a polished shopping experience \u2014 product catalog, cart, and checkout flow. Built with Next.js and TypeScript, deployed live on Vercel.",
       tags: [
-        {
-          name: "react",
-          color: "blue-text-gradient",
-        },
-        {
-          name: "socket.io",
-          color: "green-text-gradient",
-        },
-        {
-          name: "css",
-          color: "pink-text-gradient",
-        },
+        { name: "nextjs", color: "blue-text-gradient" },
+        { name: "typescript", color: "green-text-gradient" },
+        { name: "e-commerce", color: "pink-text-gradient" },
       ],
-      image: CodeXspaces,
-      source_code_link: "https://github.com/jahan-code/CodeXSpace",
-    },
-    {
-      name: "Chess-Cloud",
-      description:
-        "A real-time online chess platform where strategy meets competition — live multiplayer games over Socket.io with an Express backend.",
-      tags: [
-        {
-          name: "express",
-          color: "blue-text-gradient",
-        },
-        {
-          name: "socket.io",
-          color: "green-text-gradient",
-        },
-        {
-          name: "react",
-          color: "pink-text-gradient",
-        },
-      ],
-      image: Chess,
-      source_code_link: "https://github.com/jahan-code/Chess-Cloud",
+      image: LittleLuxuries,
+      source_code_link: "https://github.com/jahanzaib0013-a11y/LittleLuxuries",
+      live_demo_link: "https://little-luxuries.vercel.app",
     },
   ];
 

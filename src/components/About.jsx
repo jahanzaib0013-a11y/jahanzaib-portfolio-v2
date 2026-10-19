@@ -39,7 +39,7 @@ const About = () => {
    variants={fadeIn("","",0.1,1)}
    className='mt-4 text-secondary text-17px max-w-3xl leading-[30px]'
    >
-    I'm a Full-Stack Developer specializing in TypeScript, Next.js, and the MERN stack (MongoDB, Express.js, React, Node.js). I build fast, responsive, and user-centric web applications — from polished admin dashboards and productivity platforms to robust REST APIs with authentication and role-based access. I care about clean architecture, type safety, and shipping products that feel great to use. Have a project in mind? Let's build something remarkable together.
+    I'm a Full Stack AI Developer building AI-powered web applications end to end — from schema and APIs to production deployment. My work spans React/Next.js front-ends, Node.js/Express services, and LLM integrations (RAG, AI agents, prompt engineering) wired into real, live products serving thousands of users. I've built production data pipelines on AWS (SQS, Lambda), integrated payment terminals like Nayax and NMI, and shipped AI SaaS platforms handling 1,200+ generations per month. Strong bias toward clean data models, reliable APIs, and software that holds up under real users.
    </motion.p>
    <div className='mt-20 flex flex-wrap gap-10'>
     {services.map((service,index)=>(

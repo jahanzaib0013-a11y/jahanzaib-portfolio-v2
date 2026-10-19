@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="720" height="405" viewBox="0 0 720 405">
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#12082e"/>
+      <stop offset="55%" stop-color="#4c1d95"/>
+      <stop offset="100%" stop-color="#c084fc"/>
+    </linearGradient>
+  </defs>
+  <rect width="720" height="405" fill="url(#g)"/>
+  <circle cx="610" cy="90" r="130" fill="#ffffff" opacity="0.07"/>
+  <circle cx="100" cy="330" r="95" fill="#ffffff" opacity="0.05"/>
+  <text x="60" y="195" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="62" font-weight="700" fill="#ffffff">AuraCover</text>
+  <text x="62" y="242" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="24" fill="#e3d0fd">AI SaaS · 1,200+ generations / month</text>
+  <text x="62" y="282" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="18" fill="#c3a8ef">Next.js · Serverless · LLM integration</text>
+</svg>
