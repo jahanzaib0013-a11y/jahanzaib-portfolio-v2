@@ -149,6 +149,12 @@ import {
   const projects = [
     {
       name: "AuraCover",
+      category: "ai",
+      highlights: [
+        "Serving 1,200+ AI generations per month in production",
+        "Prompt-engineered pipeline for consistent, structured cover output",
+        "Next.js front-end with a serverless API layer on Vercel",
+      ],
       description:
         "AI-powered SaaS generating custom cover content — serving 1,200+ AI generations per month in production. Next.js front-end, serverless API layer, and LLM integration with prompt engineering for consistent structured output.",
       tags: [
@@ -162,6 +168,12 @@ import {
     },
     {
       name: "Decorum Vending",
+      category: "payments",
+      highlights: [
+        "Penny-exact reconciliation across 360+ live transactions",
+        "Nayax → AWS SQS → Lambda → Supabase Postgres ingestion pipeline",
+        "Hardened with dead-letter queues and batch failure handling",
+      ],
       description:
         "Payment-events ingestion pipeline (Nayax \u2192 AWS SQS \u2192 Lambda \u2192 Supabase Postgres) with penny-exact transaction reconciliation across 360+ transactions. Integrated Nayax, NMI, and Payter payment terminals, hardened with dead-letter queues and batch failure handling.",
       tags: [
@@ -175,6 +187,12 @@ import {
     },
     {
       name: "Electric Love",
+      category: "fullstack",
+      highlights: [
+        "Manages a 40-vehicle Tesla fleet in production",
+        "Vehicle API integrations with a custom operations dashboard",
+        "AI-powered driver onboarding with 4-step application flow",
+      ],
       description:
         "Fleet-management SaaS platform managing a 40-vehicle Tesla fleet \u2014 integrating vehicle APIs with a custom operations dashboard for real-time fleet oversight.",
       tags: [
@@ -188,6 +206,12 @@ import {
     },
     {
       name: "InsightFlow",
+      category: "ai",
+      highlights: [
+        "RAG-based document intelligence with semantic search",
+        "Upload, index, and query documents in natural language",
+        "Type-safe Next.js + TypeScript workspace UI",
+      ],
       description:
         "An analytics and insights dashboard that turns raw data into clear, actionable visualizations. Built with Next.js and TypeScript, deployed live on Vercel.",
       tags: [
@@ -202,6 +226,12 @@ import {
     },
     {
       name: "Little Luxuries",
+      category: "fullstack",
+      highlights: [
+        "Full storefront: catalog, cart, and checkout flow",
+        "Polished, responsive boutique UI with brand-consistent design",
+        "Built with Next.js and TypeScript, deployed on Vercel",
+      ],
       description:
         "A boutique e-commerce storefront with a polished shopping experience \u2014 product catalog, cart, and checkout flow. Built with Next.js and TypeScript, deployed live on Vercel.",
       tags: [
