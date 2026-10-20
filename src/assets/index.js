@@ -19,6 +19,7 @@ import reactjs from "./tech/reactjs.png";
 import redux from "./tech/redux.png";
 import tailwind from "./tech/tailwind.png";
 import Freely from './Freely.png'
+import qubitarsAppreciation from './qubitars-appreciation.jpg'
 import threejs from "./tech/threejs.svg";
 import typescript from "./tech/typescript-original.svg";
 import nextjs from "./tech/nextjs-original.svg";
@@ -86,5 +87,6 @@ export {
   Wave,
   CodeXspaces,
   Chess,
-  jahanzaib
+  jahanzaib,
+  qubitarsAppreciation
 };
