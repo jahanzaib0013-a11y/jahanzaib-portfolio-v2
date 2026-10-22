@@ -56,23 +56,37 @@ const Hero = () => {
           </div>
         </div>
 
-        {/* right: profile photo with spinning gradient ring */}
+        {/* right: profile photo with spinning gradient ring + hover Download CV */}
         <motion.div
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.8, ease: 'easeOut' }}
-          className='relative z-10 shrink-0 p-[3px] rounded-full'
+          className='relative z-10 shrink-0 flex flex-col items-center group'
         >
-          <div className='absolute inset-0 rounded-full blur-2xl opacity-40 scale-110 bg-gradient-to-tr from-[#915eff] to-[#00cea8]' />
-          <div
-            className='absolute inset-0 rounded-full animate-[spin_8s_linear_infinite]'
-            style={{ background: 'conic-gradient(from 180deg, #915eff, #00cea8, #915eff)' }}
-          />
-          <img
-            src={jahanzaib}
-            alt='Jahanzaib'
-            className='relative w-[240px] sm:w-[300px] lg:w-[350px] aspect-square rounded-full border-4 border-primary object-cover'
-          />
+          <div className='relative p-[3px] rounded-full'>
+            <div className='absolute inset-0 rounded-full blur-2xl opacity-40 scale-110 bg-gradient-to-tr from-[#915eff] to-[#00cea8]' />
+            <div
+              className='absolute inset-0 rounded-full animate-[spin_8s_linear_infinite]'
+              style={{ background: 'conic-gradient(from 180deg, #915eff, #00cea8, #915eff)' }}
+            />
+            <img
+              src={jahanzaib}
+              alt='Jahanzaib'
+              className='relative w-[240px] sm:w-[300px] lg:w-[350px] aspect-square rounded-full border-4 border-primary object-cover'
+            />
+          </div>
+
+          {/* Download CV — reveals on hover */}
+          <a
+            href='/Jahanzaib-Iftikhar-CV.pdf'
+            download
+            className='mt-4 inline-flex items-center gap-2 px-5 h-11 rounded-full bg-[#915eff] text-white text-[14px] font-semibold shadow-[0_10px_30px_-8px_rgba(145,94,255,0.7)] opacity-0 translate-y-2 pointer-events-none transition-all duration-300 group-hover:opacity-100 group-hover:translate-y-0 group-hover:pointer-events-auto hover:scale-105'
+          >
+            <svg width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='currentColor' strokeWidth='2.2' strokeLinecap='round' strokeLinejoin='round'>
+              <path d='M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4' /><path d='M7 10l5 5 5-5' /><path d='M12 15V3' />
+            </svg>
+            Download CV
+          </a>
         </motion.div>
       </div>
 
