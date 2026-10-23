@@ -1,7 +1,7 @@
 
 import { BrowserRouter } from "react-router-dom";
 
-import { About, Blog, Contact, Experience, Feedbacks, Hero, Marquee, Navbar, Tech, Works, StarsCanvas } from "./components";
+import { About, Blog, Contact, Experience, Feedbacks, Hero, Marquee, Navbar, Tech, Works, WhatsAppButton, StarsCanvas } from "./components";
 
 const App = () => {
   return (
@@ -22,6 +22,7 @@ const App = () => {
           <Contact />
           <StarsCanvas />
         </div>
+        <WhatsAppButton />
       </div>
     </BrowserRouter>
   );

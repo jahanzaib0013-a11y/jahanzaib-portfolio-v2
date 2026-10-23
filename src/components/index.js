@@ -7,6 +7,7 @@ import Tech from './Tech';
 import Experience from './Experience';
 import Works from './Works';
 import Blog from './Blog';
+import WhatsAppButton from './WhatsAppButton';
 import Feedbacks from './Feedbacks';
 import Contact from './Contact';
 
@@ -19,6 +20,7 @@ export {
   Experience,
   Works,
   Blog,
+  WhatsAppButton,
   Feedbacks,
   Contact,
   EarthCanvas, 
