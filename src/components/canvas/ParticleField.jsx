@@ -1,6 +1,7 @@
 import React, { useRef, useMemo } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
 import * as THREE from "three";
+import useVisible from "../../utils/useVisible";
 
 const COUNT = 130;        // nodes that get connecting lines
 const RANGE = 9;          // cube half-size the nodes live in
@@ -110,10 +111,14 @@ const Network = () => {
 };
 
 const ParticleField = () => {
+  const wrapRef = useRef();
+  const visible = useVisible(wrapRef);
   return (
-    <Canvas frameloop='always' dpr={[1, 2]} camera={{ position: [0, 0, 16], fov: 55 }}>
-      <Network />
-    </Canvas>
+    <div ref={wrapRef} className='w-full h-full'>
+      <Canvas frameloop={visible ? 'always' : 'never'} dpr={[1, 2]} camera={{ position: [0, 0, 16], fov: 55 }}>
+        <Network />
+      </Canvas>
+    </div>
   );
 };
 

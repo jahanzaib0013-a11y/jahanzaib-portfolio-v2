@@ -3,6 +3,7 @@ import { Canvas, useFrame } from "@react-three/fiber";
 import { Points, PointMaterial, Preload } from "@react-three/drei";
 import * as random from "maath/random/dist/maath-random.esm";
 import React from "react";
+import useVisible from "../../utils/useVisible";
 const Stars = (props) => {
   const ref = useRef();
   const [sphere] = useState(() => random.inSphere(new Float32Array(5001), { radius: 1.2 }));
@@ -28,9 +29,11 @@ const Stars = (props) => {
 };
 
 const StarsCanvas = () => {
+  const wrapRef = useRef();
+  const visible = useVisible(wrapRef);
   return (
-    <div className='w-full h-auto absolute inset-0 z-[-1]'>
-      <Canvas camera={{ position: [0, 0, 1] }}>
+    <div ref={wrapRef} className='w-full h-auto absolute inset-0 z-[-1]'>
+      <Canvas frameloop={visible ? 'always' : 'never'} camera={{ position: [0, 0, 1] }}>
         <Suspense fallback={null}>
           <Stars />
         </Suspense>

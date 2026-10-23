@@ -1,8 +1,9 @@
-import React, { Suspense } from "react";
+import React, { Suspense, useRef } from "react";
 import { Canvas } from "@react-three/fiber";
 import { OrbitControls, Preload, useGLTF } from "@react-three/drei";
 
 import CanvasLoader from "../Loader";
+import useVisible from "../../utils/useVisible";
 
 const Earth = () => {
   const earth = useGLTF("./planet/scene.gltf");
@@ -13,10 +14,13 @@ const Earth = () => {
 };
 
 const EarthCanvas = () => {
+  const wrapRef = useRef();
+  const visible = useVisible(wrapRef);
   return (
+    <div ref={wrapRef} className='w-full h-full'>
     <Canvas
       shadows
-      frameloop='demand'
+      frameloop={visible ? 'demand' : 'never'}
       dpr={[1, 2]}
       gl={{ preserveDrawingBuffer: true }}
       camera={{
@@ -38,6 +42,7 @@ const EarthCanvas = () => {
         <Preload all />
       </Suspense>
     </Canvas>
+    </div>
   );
 };
 
