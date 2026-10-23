@@ -40,7 +40,7 @@ import {
     },
     {
       id: "work",
-      title: "Work",
+      title: "Projects",
     },
     {
       id: "blog",

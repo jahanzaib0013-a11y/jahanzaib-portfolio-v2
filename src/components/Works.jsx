@@ -154,12 +154,27 @@ const ProjectCard=({index,name,description,tags,image,video,source_code_link,liv
             )}
           </div>
 
-          {/* video badge */}
+          {/* video affordances */}
           {video && (
-            <div className='absolute bottom-0 left-0 right-0 px-4 py-2.5 bg-gradient-to-t from-black/90 via-black/40 to-transparent flex items-center gap-2 pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-500'>
-              <span className='w-2 h-2 rounded-full bg-red-500 animate-pulse'/>
-              <span className='text-white text-[11px] font-medium tracking-[0.12em] uppercase'>Playing demo</span>
-            </div>
+            <>
+              {/* centered play button — always visible at rest, fades while playing */}
+              <div className='absolute inset-0 flex items-center justify-center pointer-events-none opacity-100 group-hover:opacity-0 transition-opacity duration-300'>
+                <div className='relative flex items-center justify-center w-14 h-14 rounded-full bg-black/55 backdrop-blur-md border border-white/25 shadow-[0_6px_20px_rgba(0,0,0,0.4)]'>
+                  <span className='absolute inline-flex w-full h-full rounded-full bg-white/20 animate-ping' />
+                  <svg width='20' height='20' viewBox='0 0 24 24' fill='#fff' className='relative ml-1'><path d='M8 5v14l11-7z' /></svg>
+                </div>
+              </div>
+              {/* at-rest hint */}
+              <div className='absolute bottom-0 left-0 right-0 px-4 py-2.5 bg-gradient-to-t from-black/90 via-black/40 to-transparent flex items-center gap-2 pointer-events-none opacity-100 group-hover:opacity-0 transition-opacity duration-300'>
+                <svg width='11' height='11' viewBox='0 0 24 24' fill='#fff'><path d='M8 5v14l11-7z' /></svg>
+                <span className='text-white text-[11px] font-medium tracking-[0.12em] uppercase'>Hover to play demo</span>
+              </div>
+              {/* playing state */}
+              <div className='absolute bottom-0 left-0 right-0 px-4 py-2.5 bg-gradient-to-t from-black/90 via-black/40 to-transparent flex items-center gap-2 pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-500'>
+                <span className='w-2 h-2 rounded-full bg-red-500 animate-pulse' />
+                <span className='text-white text-[11px] font-medium tracking-[0.12em] uppercase'>Playing demo</span>
+              </div>
+            </>
           )}
           </div>
 
@@ -218,11 +233,7 @@ const Works = () => {
     <motion.p
     variants={fadeIn("","",0.1,1)}
     className='mt-3 text-secondary text-[17px] max-w-3xl leading-[30px]'>
-          Following projects showcases my skills and experience through
-          real-world examples of my work. Each project is briefly described with
-          links to code repositories and live demos in it. It reflects my
-          ability to solve complex problems, work with different technologies,
-          and manage projects effectively.
+          Real-world products I've shipped end to end. <span className='text-white font-medium'>Hover any card to watch a recorded demo</span>, or click it to open the full walkthrough with the live-site and source links.
     </motion.p>
     </div>
     <div className='mt-12 flex flex-wrap gap-3'>
@@ -256,4 +267,4 @@ const Works = () => {
   )
 }
 
-export default SectionWrapper(Works,"")
+export default SectionWrapper(Works,"work")

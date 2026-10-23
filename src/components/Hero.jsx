@@ -78,7 +78,7 @@ const Hero = () => {
 
           {/* Download CV — reveals on hover */}
           <a
-            href='/Jahanzaib-Iftikhar-CV.pdf'
+            href={`${import.meta.env.BASE_URL}Jahanzaib-Iftikhar-CV.pdf`}
             download
             className='mt-4 inline-flex items-center gap-2 px-5 h-11 rounded-full bg-[#915eff] text-white text-[14px] font-semibold shadow-[0_10px_30px_-8px_rgba(145,94,255,0.7)] opacity-0 translate-y-2 pointer-events-none transition-all duration-300 group-hover:opacity-100 group-hover:translate-y-0 group-hover:pointer-events-auto hover:scale-105'
           >
