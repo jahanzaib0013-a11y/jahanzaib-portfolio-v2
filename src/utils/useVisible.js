@@ -3,8 +3,13 @@ import { useState, useEffect } from 'react'
 // Returns true while the referenced element is on (or near) screen.
 // Used to pause off-screen WebGL canvases without any visual change:
 // they resume ~300px before entering the viewport.
-export default function useVisible(ref, rootMargin = '300px') {
-  const [visible, setVisible] = useState(true)
+//
+// `initial` is what the hook reports before the first IntersectionObserver
+// callback lands. True suits a canvas that lives at the fold; an autoplaying
+// video should pass false, so play() cannot fire for every element at mount
+// before any of them has been measured.
+export default function useVisible(ref, rootMargin = '300px', initial = true) {
+  const [visible, setVisible] = useState(initial)
 
   useEffect(() => {
     const el = ref.current

@@ -1,4 +1,4 @@
-import React,{Suspense} from 'react'
+import {Suspense} from 'react'
 import { Canvas } from '@react-three/fiber'
 import { Decal,Float,useTexture,OrbitControls,Preload } from '@react-three/drei'
 import CanvasLoader from '../Loader'

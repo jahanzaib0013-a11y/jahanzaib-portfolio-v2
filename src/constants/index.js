@@ -10,7 +10,6 @@ import {
     nodejs,
     mongodb,
     git,
-    figma,
     docker,
     typescript,
     nextjs,
@@ -26,13 +25,16 @@ import {
     ElectricLoveVideo,
     InsightFlowVideo,
     LittleLuxuriesVideo,
-    threejs,
   } from "../assets";
 
   export const navLinks = [
     {
       id: "about",
       title: "About",
+    },
+    {
+      id: "architecture",
+      title: "Architecture",
     },
     {
       id: "experience",

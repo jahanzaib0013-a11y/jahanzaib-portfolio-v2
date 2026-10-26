@@ -12,6 +12,15 @@ dist
 dist-ssr
 *.local
 .env
+# Mascot build intermediates: the raw Tripo export is 8 MB and only exists to be
+# optimized from. The committed artifact is src/assets/models/mascot.glb.
+scripts/mascot-work/
+# AI/IDE tooling metadata — skill definitions, generated repo wiki, editor rules.
+# None of it is site code, so it stays out of the public repo.
+.qoder/
+.agents/
+.cursor/
+skills-lock.json
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json

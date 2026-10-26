@@ -1,120 +1,244 @@
-@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap");
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: "Poppins", sans-serif;
-  scroll-behavior: smooth;
-  color-scheme: dark;
+@layer base {
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  html {
+    background: #f7f6f9;
+    scroll-behavior: smooth;
+    color-scheme: light;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    background: #f7f6f9;
+    color: #14131a;
+    font-family: "IBM Plex Sans", sans-serif;
+    font-size: 1rem;
+    line-height: 1.75;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: "Bricolage Grotesque", sans-serif;
+    font-weight: 700;
+    color: #14131a;
+  }
+
+  ::selection {
+    background: rgba(31, 58, 147, 0.16);
+    color: #14131a;
+  }
+
+  :focus-visible {
+    outline: 2px solid #1f3a93;
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+
+  ::-webkit-scrollbar {
+    width: 10px;
+  }
+  ::-webkit-scrollbar-track {
+    background: #f7f6f9;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #d8d4e3;
+    border-radius: 999px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: #b9b4c9;
+  }
 }
 
-.hash-span {
-  margin-top: -100px;
-  padding-bottom: 100px;
-  display: block;
+@layer components {
+  /* Section chrome: hairline rule + mono title block, used by every section */
+  .shell {
+    @apply w-full max-w-shell mx-auto px-6 sm:px-10 lg:px-14;
+  }
+
+  .section {
+    @apply relative w-full py-20 sm:py-24 lg:py-28 border-t border-rule;
+  }
+
+  .section-head {
+    @apply flex flex-wrap items-baseline justify-between gap-x-8 gap-y-3 pb-8 mb-12 border-b border-rule;
+  }
+
+  .section-index {
+    @apply font-mono text-eyebrow text-blueprint;
+  }
+
+  .section-title {
+    @apply font-display text-h2;
+  }
+
+  .section-meta {
+    @apply font-mono text-eyebrow text-mute uppercase;
+  }
+
+  .eyebrow {
+    @apply font-mono text-eyebrow uppercase text-mute;
+  }
+
+  .card {
+    @apply bg-surface border border-rule rounded-card;
+  }
+
+  .rule-link {
+    @apply relative text-blueprint after:absolute after:left-0 after:-bottom-0.5 after:h-px after:w-full after:origin-right after:scale-x-0 after:bg-blueprint hover:after:origin-left hover:after:scale-x-100 transition-transform duration-200 ease-out;
+  }
 }
 
-.black-gradient {
-  background: #000000; /* fallback for old browsers */
-  background: -webkit-linear-gradient(
-    to right,
-    #434343,
-    #000000
-  ); /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(
-    to right,
-    #434343,
-    #000000
-  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+@layer utilities {
+  .hash-span {
+    margin-top: -96px;
+    padding-bottom: 96px;
+    display: block;
+  }
+
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .grain {
+    background-image: radial-gradient(rgba(20, 19, 26, 0.055) 1px, transparent 1px);
+    background-size: 22px 22px;
+  }
 }
 
-.violet-gradient {
-  background: #804dee;
-  background: linear-gradient(-90deg, #804dee 0%, rgba(60, 51, 80, 0) 100%);
-  background: -webkit-linear-gradient(
-    -90deg,
-    #804dee 0%,
-    rgba(60, 51, 80, 0) 100%
+/* House lights down (hero film playing): the faded room can't be clicked through. */
+.house-dark [data-house-fade] {
+  pointer-events: none;
+}
+
+/* Navbar inverts when the room goes dark — light text on transparent/dark
+   background. Two things can dim the room: the hero film (`.house-dark`, owned
+   by TheaterScreen) and any `[data-tone='dark']` section reaching the header
+   strip (`.inverted`, owned by the Navbar observer). Same treatment, either. */
+.house-dark header,
+.inverted header {
+  background: transparent !important;
+  border-color: transparent !important;
+  color: #f6f4fa;
+}
+.house-dark header a,
+.inverted header a,
+.house-dark header button,
+.inverted header button {
+  color: inherit;
+}
+.house-dark header .text-ink,
+.inverted header .text-ink {
+  color: #f6f4fa;
+}
+.house-dark header .text-mute,
+.inverted header .text-mute {
+  color: rgba(238, 236, 245, 0.7);
+}
+.house-dark header .text-graphite,
+.inverted header .text-graphite {
+  color: rgba(238, 236, 245, 0.6);
+}
+.house-dark header .border-rule,
+.inverted header .border-rule {
+  border-color: rgba(255, 255, 255, 0.12) !important;
+}
+.house-dark header .bg-paper\/95,
+.inverted header .bg-paper\/95,
+.house-dark header .bg-paper\/80,
+.inverted header .bg-paper\/80 {
+  background: rgba(9, 8, 13, 0.6) !important;
+  backdrop-filter: blur(12px);
+}
+.house-dark header:hover,
+.inverted header:hover {
+  background: rgba(9, 8, 13, 0.4) !important;
+  backdrop-filter: blur(8px);
+}
+.house-dark .nav-mobile-panel,
+.inverted .nav-mobile-panel {
+  background: rgba(9, 8, 13, 0.92) !important;
+  border-color: rgba(255, 255, 255, 0.1) !important;
+}
+.house-dark .nav-mobile-panel a,
+.inverted .nav-mobile-panel a {
+  color: #f6f4fa;
+}
+
+/* Card and spec strip off stage (film playing, or the wash before their entrance). */
+.card-away [data-card] {
+  pointer-events: none;
+}
+
+/*
+ * Hero copy as the film's titles. --house (0 lit → 1 dark) and --reel (0 → 1
+ * through the clip) are written on <html> by <TheaterScreen />; --at is when this
+ * piece lands. A piece is shown while the lights are up, leaves as they go down,
+ * and returns over the picture once the reel passes --at (in about 1/14 of the
+ * clip). With no film, both vars are unset and every piece is simply visible.
+ */
+.reel-piece {
+  --show: max(
+    calc(1 - var(--house, 0)),
+    clamp(0, calc((var(--reel, 0) - var(--at, 0)) * 14), 1)
   );
+  opacity: var(--show);
+  transform: translateY(calc((1 - var(--show)) * 12px));
+  filter: blur(calc((1 - var(--show)) * 6px));
 }
 
-.green-pink-gradient {
-  background: "#00cea8";
-  background: linear-gradient(90.13deg, #00cea8 1.9%, #bf61ff 97.5%);
-  background: -webkit-linear-gradient(-90.13deg, #00cea8 1.9%, #bf61ff 97.5%);
+/* Over the picture the copy is light, with a shadow so it reads on any frame. */
+.reel-ink,
+.reel-soft,
+.reel-accent {
+  transition: color 0.45s ease, text-shadow 0.45s ease;
+}
+.house-dark .reel-ink {
+  color: #f6f4fa;
+}
+.house-dark .reel-soft {
+  color: rgba(238, 236, 245, 0.84);
+}
+.house-dark .reel-accent {
+  color: #ff9a73;
+}
+.house-dark .reel-ink,
+.house-dark .reel-soft,
+.house-dark .reel-accent {
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.55), 0 6px 28px rgba(0, 0, 0, 0.6);
+}
+.house-dark .rule-link.reel-ink::after {
+  background-color: #f6f4fa;
+}
+.house-dark .reel-cta {
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.3), 0 12px 32px -10px rgba(0, 0, 0, 0.7);
 }
 
-.orange-text-gradient {
-  background: #f12711; /* fallback for old browsers */
-  background: -webkit-linear-gradient(
-    to top,
-    #f12711,
-    #f5af19
-  ); /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(
-    to top,
-    #f12711,
-    #f5af19
-  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }
 
-.green-text-gradient {
-  background: #11998e; /* fallback for old browsers */
-  background: -webkit-linear-gradient(
-    to top,
-    #11998e,
-    #38ef7d
-  ); /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(
-    to top,
-    #11998e,
-    #38ef7d
-  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
-.blue-text-gradient {
-  /* background: -webkit-linear-gradient(#eee, #333); */
-  background: #56ccf2; /* fallback for old browsers */
-  background: -webkit-linear-gradient(
-    to top,
-    #2f80ed,
-    #56ccf2
-  ); /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(
-    to top,
-    #2f80ed,
-    #56ccf2
-  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
-.pink-text-gradient {
-  background: #ec008c; /* fallback for old browsers */
-  background: -webkit-linear-gradient(
-    to top,
-    #ec008c,
-    #fc6767
-  ); /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(
-    to top,
-    #ec008c,
-    #fc6767
-  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
-/* canvas- styles */
+/* canvas loader */
 .canvas-loader {
   font-size: 10px;
   width: 1em;
@@ -129,106 +253,545 @@
 @keyframes mulShdSpin {
   0%,
   100% {
-    box-shadow: 0em -2.6em 0em 0em #ffffff,
-      1.8em -1.8em 0 0em rgba(255, 255, 255, 0.2),
-      2.5em 0em 0 0em rgba(255, 255, 255, 0.2),
-      1.75em 1.75em 0 0em rgba(255, 255, 255, 0.2),
-      0em 2.5em 0 0em rgba(255, 255, 255, 0.2),
-      -1.8em 1.8em 0 0em rgba(255, 255, 255, 0.2),
-      -2.6em 0em 0 0em rgba(255, 255, 255, 0.5),
-      -1.8em -1.8em 0 0em rgba(255, 255, 255, 0.7);
+    box-shadow: 0em -2.6em 0em 0em #14131a,
+      1.8em -1.8em 0 0em rgba(20, 19, 26, 0.2),
+      2.5em 0em 0 0em rgba(20, 19, 26, 0.2),
+      1.75em 1.75em 0 0em rgba(20, 19, 26, 0.2),
+      0em 2.5em 0 0em rgba(20, 19, 26, 0.2),
+      -1.8em 1.8em 0 0em rgba(20, 19, 26, 0.2),
+      -2.6em 0em 0 0em rgba(20, 19, 26, 0.5),
+      -1.8em -1.8em 0 0em rgba(20, 19, 26, 0.7);
   }
   12.5% {
-    box-shadow: 0em -2.6em 0em 0em rgba(255, 255, 255, 0.7),
-      1.8em -1.8em 0 0em #ffffff, 2.5em 0em 0 0em rgba(255, 255, 255, 0.2),
-      1.75em 1.75em 0 0em rgba(255, 255, 255, 0.2),
-      0em 2.5em 0 0em rgba(255, 255, 255, 0.2),
-      -1.8em 1.8em 0 0em rgba(255, 255, 255, 0.2),
-      -2.6em 0em 0 0em rgba(255, 255, 255, 0.2),
-      -1.8em -1.8em 0 0em rgba(255, 255, 255, 0.5);
+    box-shadow: 0em -2.6em 0em 0em rgba(20, 19, 26, 0.7),
+      1.8em -1.8em 0 0em #14131a, 2.5em 0em 0 0em rgba(20, 19, 26, 0.2),
+      1.75em 1.75em 0 0em rgba(20, 19, 26, 0.2),
+      0em 2.5em 0 0em rgba(20, 19, 26, 0.2),
+      -1.8em 1.8em 0 0em rgba(20, 19, 26, 0.2),
+      -2.6em 0em 0 0em rgba(20, 19, 26, 0.2),
+      -1.8em -1.8em 0 0em rgba(20, 19, 26, 0.5);
   }
   25% {
-    box-shadow: 0em -2.6em 0em 0em rgba(255, 255, 255, 0.5),
-      1.8em -1.8em 0 0em rgba(255, 255, 255, 0.7), 2.5em 0em 0 0em #ffffff,
-      1.75em 1.75em 0 0em rgba(255, 255, 255, 0.2),
-      0em 2.5em 0 0em rgba(255, 255, 255, 0.2),
-      -1.8em 1.8em 0 0em rgba(255, 255, 255, 0.2),
-      -2.6em 0em 0 0em rgba(255, 255, 255, 0.2),
-      -1.8em -1.8em 0 0em rgba(255, 255, 255, 0.2);
+    box-shadow: 0em -2.6em 0em 0em rgba(20, 19, 26, 0.5),
+      1.8em -1.8em 0 0em rgba(20, 19, 26, 0.7), 2.5em 0em 0 0em #14131a,
+      1.75em 1.75em 0 0em rgba(20, 19, 26, 0.2),
+      0em 2.5em 0 0em rgba(20, 19, 26, 0.2),
+      -1.8em 1.8em 0 0em rgba(20, 19, 26, 0.2),
+      -2.6em 0em 0 0em rgba(20, 19, 26, 0.2),
+      -1.8em -1.8em 0 0em rgba(20, 19, 26, 0.2);
   }
   37.5% {
-    box-shadow: 0em -2.6em 0em 0em rgba(255, 255, 255, 0.2),
-      1.8em -1.8em 0 0em rgba(255, 255, 255, 0.5),
-      2.5em 0em 0 0em rgba(255, 255, 255, 0.7), 1.75em 1.75em 0 0em #ffffff,
-      0em 2.5em 0 0em rgba(255, 255, 255, 0.2),
-      -1.8em 1.8em 0 0em rgba(255, 255, 255, 0.2),
-      -2.6em 0em 0 0em rgba(255, 255, 255, 0.2),
-      -1.8em -1.8em 0 0em rgba(255, 255, 255, 0.2);
+    box-shadow: 0em -2.6em 0em 0em rgba(20, 19, 26, 0.2),
+      1.8em -1.8em 0 0em rgba(20, 19, 26, 0.5),
+      2.5em 0em 0 0em rgba(20, 19, 26, 0.7), 1.75em 1.75em 0 0em #14131a,
+      0em 2.5em 0 0em rgba(20, 19, 26, 0.2),
+      -1.8em 1.8em 0 0em rgba(20, 19, 26, 0.2),
+      -2.6em 0em 0 0em rgba(20, 19, 26, 0.2),
+      -1.8em -1.8em 0 0em rgba(20, 19, 26, 0.2);
   }
   50% {
-    box-shadow: 0em -2.6em 0em 0em rgba(255, 255, 255, 0.2),
-      1.8em -1.8em 0 0em rgba(255, 255, 255, 0.2),
-      2.5em 0em 0 0em rgba(255, 255, 255, 0.5),
-      1.75em 1.75em 0 0em rgba(255, 255, 255, 0.7), 0em 2.5em 0 0em #ffffff,
-      -1.8em 1.8em 0 0em rgba(255, 255, 255, 0.2),
-      -2.6em 0em 0 0em rgba(255, 255, 255, 0.2),
-      -1.8em -1.8em 0 0em rgba(255, 255, 255, 0.2);
+    box-shadow: 0em -2.6em 0em 0em rgba(20, 19, 26, 0.2),
+      1.8em -1.8em 0 0em rgba(20, 19, 26, 0.2),
+      2.5em 0em 0 0em rgba(20, 19, 26, 0.5),
+      1.75em 1.75em 0 0em rgba(20, 19, 26, 0.7), 0em 2.5em 0 0em #14131a,
+      -1.8em 1.8em 0 0em rgba(20, 19, 26, 0.2),
+      -2.6em 0em 0 0em rgba(20, 19, 26, 0.2),
+      -1.8em -1.8em 0 0em rgba(20, 19, 26, 0.2);
   }
   62.5% {
-    box-shadow: 0em -2.6em 0em 0em rgba(255, 255, 255, 0.2),
-      1.8em -1.8em 0 0em rgba(255, 255, 255, 0.2),
-      2.5em 0em 0 0em rgba(255, 255, 255, 0.2),
-      1.75em 1.75em 0 0em rgba(255, 255, 255, 0.5),
-      0em 2.5em 0 0em rgba(255, 255, 255, 0.7), -1.8em 1.8em 0 0em #ffffff,
-      -2.6em 0em 0 0em rgba(255, 255, 255, 0.2),
-      -1.8em -1.8em 0 0em rgba(255, 255, 255, 0.2);
+    box-shadow: 0em -2.6em 0em 0em rgba(20, 19, 26, 0.2),
+      1.8em -1.8em 0 0em rgba(20, 19, 26, 0.2),
+      2.5em 0em 0 0em rgba(20, 19, 26, 0.2),
+      1.75em 1.75em 0 0em rgba(20, 19, 26, 0.5),
+      0em 2.5em 0 0em rgba(20, 19, 26, 0.7), -1.8em 1.8em 0 0em #14131a,
+      -2.6em 0em 0 0em rgba(20, 19, 26, 0.2),
+      -1.8em -1.8em 0 0em rgba(20, 19, 26, 0.2);
   }
   75% {
-    box-shadow: 0em -2.6em 0em 0em rgba(255, 255, 255, 0.2),
-      1.8em -1.8em 0 0em rgba(255, 255, 255, 0.2),
-      2.5em 0em 0 0em rgba(255, 255, 255, 0.2),
-      1.75em 1.75em 0 0em rgba(255, 255, 255, 0.2),
-      0em 2.5em 0 0em rgba(255, 255, 255, 0.5),
-      -1.8em 1.8em 0 0em rgba(255, 255, 255, 0.7), -2.6em 0em 0 0em #ffffff,
-      -1.8em -1.8em 0 0em rgba(255, 255, 255, 0.2);
+    box-shadow: 0em -2.6em 0em 0em rgba(20, 19, 26, 0.2),
+      1.8em -1.8em 0 0em rgba(20, 19, 26, 0.2),
+      2.5em 0em 0 0em rgba(20, 19, 26, 0.2),
+      1.75em 1.75em 0 0em rgba(20, 19, 26, 0.2),
+      0em 2.5em 0 0em rgba(20, 19, 26, 0.5),
+      -1.8em 1.8em 0 0em rgba(20, 19, 26, 0.7), -2.6em 0em 0 0em #14131a,
+      -1.8em -1.8em 0 0em rgba(20, 19, 26, 0.2);
   }
   87.5% {
-    box-shadow: 0em -2.6em 0em 0em rgba(255, 255, 255, 0.2),
-      1.8em -1.8em 0 0em rgba(255, 255, 255, 0.2),
-      2.5em 0em 0 0em rgba(255, 255, 255, 0.2),
-      1.75em 1.75em 0 0em rgba(255, 255, 255, 0.2),
-      0em 2.5em 0 0em rgba(255, 255, 255, 0.2),
-      -1.8em 1.8em 0 0em rgba(255, 255, 255, 0.5),
-      -2.6em 0em 0 0em rgba(255, 255, 255, 0.7), -1.8em -1.8em 0 0em #ffffff;
+    box-shadow: 0em -2.6em 0em 0em rgba(20, 19, 26, 0.2),
+      1.8em -1.8em 0 0em rgba(20, 19, 26, 0.2),
+      2.5em 0em 0 0em rgba(20, 19, 26, 0.2),
+      1.75em 1.75em 0 0em rgba(20, 19, 26, 0.2),
+      0em 2.5em 0 0em rgba(20, 19, 26, 0.2),
+      -1.8em 1.8em 0 0em rgba(20, 19, 26, 0.5),
+      -2.6em 0em 0 0em rgba(20, 19, 26, 0.7), -1.8em -1.8em 0 0em #14131a;
   }
 }
+
 @keyframes marquee {
-  from { transform: translateX(0); }
-  to { transform: translateX(-50%); }
-}
-.animate-marquee {
-  animation: marquee 32s linear infinite;
-}
-.marquee-mask {
-  -webkit-mask-image: linear-gradient(to right, transparent, #000 8%, #000 92%, transparent);
-  mask-image: linear-gradient(to right, transparent, #000 8%, #000 92%, transparent);
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
 }
 
-/* Blog markdown styling */
-.blog-prose { color: #b0b0c8; font-size: 15.5px; line-height: 1.75; }
-.blog-prose h1 { color: #fff; font-size: 28px; font-weight: 800; line-height: 1.2; margin-bottom: 18px; letter-spacing: -0.02em; }
-.blog-prose h2 { color: #fff; font-size: 20px; font-weight: 700; margin: 30px 0 12px; letter-spacing: -0.01em; }
-.blog-prose p { margin-bottom: 16px; }
-.blog-prose strong { color: #fff; font-weight: 600; }
-.blog-prose a { color: #00cea8; text-decoration: underline; }
-.blog-prose ul, .blog-prose ol { margin: 0 0 16px 22px; display: flex; flex-direction: column; gap: 7px; }
-.blog-prose ul { list-style: disc; }
-.blog-prose ol { list-style: decimal; }
-.blog-prose li::marker { color: #915eff; }
-.blog-prose code { font-family: 'JetBrains Mono', monospace; font-size: 13px; background: #1a1a2e; color: #c4b0ff; padding: 2px 6px; border-radius: 5px; }
-.blog-prose pre { background: #12121c; border: 1px solid rgba(255,255,255,0.08); border-radius: 12px; padding: 16px 18px; overflow-x: auto; margin-bottom: 18px; }
-.blog-prose pre code { background: none; color: #d5d0e8; padding: 0; font-size: 12.5px; line-height: 1.6; }
-.blog-prose hr { border: none; border-top: 1px solid rgba(255,255,255,0.1); margin: 26px 0; }
-.blog-prose em { color: #8b89a3; }
-.blog-prose img { width: 100%; border-radius: 12px; margin: 8px 0 22px; border: 1px solid rgba(255,255,255,0.08); }
-.blog-prose h1 + p img, .blog-prose h1 img { margin-top: 0; }
+.animate-marquee {
+  animation: marquee 60s linear infinite;
+}
+
+/* Freeze the band under the cursor — an invitation to actually read it. */
+.marquee-mask:hover .animate-marquee {
+  animation-play-state: paused;
+}
+
+.marquee-mask {
+  -webkit-mask-image: linear-gradient(
+    to right,
+    transparent,
+    #000 6%,
+    #000 94%,
+    transparent
+  );
+  mask-image: linear-gradient(
+    to right,
+    transparent,
+    #000 6%,
+    #000 94%,
+    transparent
+  );
+}
+
+/* Blog markdown */
+.blog-prose {
+  color: #3d3a4a;
+  font-size: 1.0625rem;
+  line-height: 1.78;
+  max-width: 68ch;
+}
+.blog-prose h1 {
+  color: #14131a;
+  font-family: "Bricolage Grotesque", sans-serif;
+  font-size: clamp(1.6rem, 1.2rem + 1.6vw, 2.1rem);
+  font-weight: 700;
+  line-height: 1.15;
+  letter-spacing: -0.03em;
+  margin-bottom: 1.5rem;
+}
+.blog-prose h2 {
+  color: #14131a;
+  font-family: "Bricolage Grotesque", sans-serif;
+  font-size: 1.25rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  margin: 2.5rem 0 0.9rem;
+}
+.blog-prose h3 {
+  color: #14131a;
+  font-size: 1.0625rem;
+  font-weight: 600;
+  margin: 1.9rem 0 0.6rem;
+}
+.blog-prose p {
+  margin-bottom: 1.15rem;
+}
+.blog-prose strong {
+  color: #14131a;
+  font-weight: 600;
+}
+.blog-prose a {
+  color: #1f3a93;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-decoration-thickness: 1px;
+}
+.blog-prose ul,
+.blog-prose ol {
+  margin: 0 0 1.25rem 1.35rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.blog-prose ul {
+  list-style: disc;
+}
+.blog-prose ol {
+  list-style: decimal;
+}
+.blog-prose li::marker {
+  color: #a9a4b8;
+}
+.blog-prose code {
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.875rem;
+  background: #efeef4;
+  color: #2c2838;
+  padding: 0.12em 0.42em;
+  border-radius: 4px;
+}
+.blog-prose pre {
+  background: #14131a;
+  border-radius: 6px;
+  padding: 1.15rem 1.3rem;
+  overflow-x: auto;
+  margin-bottom: 1.5rem;
+}
+.blog-prose pre code {
+  background: none;
+  color: #e6e3ee;
+  padding: 0;
+  font-size: 0.8125rem;
+  line-height: 1.7;
+}
+.blog-prose hr {
+  border: none;
+  border-top: 1px solid #e4e1ec;
+  margin: 2.5rem 0;
+}
+.blog-prose em {
+  color: #5a5766;
+}
+.blog-prose img {
+  width: 100%;
+  border-radius: 6px;
+  margin: 0.5rem 0 1.6rem;
+  border: 1px solid #e4e1ec;
+}
+.blog-prose blockquote {
+  border-left: 2px solid #1f3a93;
+  padding-left: 1.1rem;
+  margin: 0 0 1.25rem;
+  color: #5a5766;
+}
+
+/*
+ * ============================================================================
+ * Tone layer — the theater sections.
+ *
+ * A section flips to the night palette with one attribute (data-tone='dark'),
+ * set by SectionWrapper or by the section itself. Component JSX keeps writing
+ * normal token classes; the overrides below are the same trick the hero's
+ * house-dark block already uses, scoped to the section's subtree.
+ *
+ * Escape hatch: fixed overlays that must stay printed-on-paper inside a dark
+ * section (the Works case-study modal) carry data-tone='light'. The deeper
+ * selector wins by specificity and restores the light tokens.
+ * ============================================================================
+ */
+[data-tone='dark'] {
+  background: #09080d;
+  color: #f6f4fa;
+}
+[data-tone='dark'] h1,
+[data-tone='dark'] h2,
+[data-tone='dark'] h3,
+[data-tone='dark'] h4 {
+  color: #f6f4fa;
+}
+[data-tone='dark'] .text-ink {
+  color: #f6f4fa;
+}
+[data-tone='dark'] .text-graphite {
+  color: rgba(238, 236, 245, 0.72);
+}
+[data-tone='dark'] .text-mute {
+  color: rgba(238, 236, 245, 0.55);
+}
+[data-tone='dark'] .text-blueprint {
+  color: #7f9cf5;
+}
+[data-tone='dark'] .border-rule {
+  border-color: rgba(255, 255, 255, 0.12);
+}
+[data-tone='dark'] .bg-surface {
+  background-color: #121118;
+}
+[data-tone='dark'] .bg-paper {
+  background-color: #09080d;
+}
+[data-tone='dark'] .card {
+  background-color: #121118;
+  border-color: rgba(255, 255, 255, 0.12);
+}
+[data-tone='dark'] .rule-link::after {
+  background-color: #f6f4fa;
+}
+[data-tone='dark'] .bg-blueprint {
+  background-color: #7f9cf5;
+}
+/* Media mattes (Works card frames) lift one step out of the room rather than
+   to paper — an unlit screen is a darker panel, never a white one. Buttons
+   that want to read as a lit pill ask for bg-night-ink explicitly. */
+[data-tone='dark'] .bg-ink {
+  background-color: #121118;
+}
+/* The availability green #3f7d6e sinks into night; a lighter member of the
+   same hue family keeps the "all clear" read. */
+[data-tone='dark'] .text-ok {
+  color: #7fc9ae;
+}
+[data-tone='dark'] .bg-ok {
+  background-color: #7fc9ae;
+}
+/* The dotted sheet-grain reads as ink specks on paper; on night it is star dust. */
+[data-tone='dark'] .grain {
+  background-image: radial-gradient(rgba(246, 244, 250, 0.06) 1px, transparent 1px);
+}
+
+/* Hover-state tokens flip too — a #1f3a93 hover on night is invisible. */
+[data-tone='dark'] .hover\:text-blueprint:hover {
+  color: #7f9cf5;
+}
+[data-tone='dark'] .hover\:text-ink:hover {
+  color: #f6f4fa;
+}
+[data-tone='dark'] .hover\:text-graphite:hover {
+  color: rgba(238, 236, 245, 0.72);
+}
+[data-tone='dark'] .hover\:border-blueprint:hover {
+  border-color: #7f9cf5;
+}
+
+[data-tone='dark'] [data-tone='light'] {
+  background-color: #f7f6f9;
+  color: #14131a;
+}
+[data-tone='dark'] [data-tone='light'] h1,
+[data-tone='dark'] [data-tone='light'] h2,
+[data-tone='dark'] [data-tone='light'] h3,
+[data-tone='dark'] [data-tone='light'] h4 {
+  color: #14131a;
+}
+[data-tone='dark'] [data-tone='light'] .text-ink {
+  color: #14131a;
+}
+[data-tone='dark'] [data-tone='light'] .text-graphite {
+  color: #5a5766;
+}
+[data-tone='dark'] [data-tone='light'] .text-mute {
+  color: #6e6b7b;
+}
+[data-tone='dark'] [data-tone='light'] .text-blueprint {
+  color: #1f3a93;
+}
+[data-tone='dark'] [data-tone='light'] .border-rule {
+  border-color: #e4e1ec;
+}
+[data-tone='dark'] [data-tone='light'] .bg-surface {
+  background-color: #ffffff;
+}
+[data-tone='dark'] [data-tone='light'] .bg-paper {
+  background-color: #f7f6f9;
+}
+[data-tone='dark'] [data-tone='light'] .card {
+  background-color: #ffffff;
+  border-color: #e4e1ec;
+}
+[data-tone='dark'] [data-tone='light'] .rule-link::after {
+  background-color: #1f3a93;
+}
+[data-tone='dark'] [data-tone='light'] .bg-blueprint {
+  background-color: #1f3a93;
+}
+/* Buttons whose ink pill inverts to a light pill on night go back to ink on paper. */
+[data-tone='dark'] [data-tone='light'] .bg-ink {
+  background-color: #14131a;
+}
+[data-tone='dark'] [data-tone='light'] .text-ok {
+  color: #3f7d6e;
+}
+[data-tone='dark'] [data-tone='light'] .bg-ok {
+  background-color: #3f7d6e;
+}
+[data-tone='dark'] [data-tone='light'] .hover\:text-blueprint:hover {
+  color: #1f3a93;
+}
+[data-tone='dark'] [data-tone='light'] .hover\:bg-blueprint:hover {
+  background-color: #1f3a93;
+}
+[data-tone='dark'] [data-tone='light'] .hover\:border-blueprint:hover {
+  border-color: #1f3a93;
+}
+
+/* Scroll-progress hairline under the fixed header (Navbar.jsx). */
+.scroll-progress {
+  background: #1f3a93;
+  transform-origin: 0 50%;
+}
+.inverted .scroll-progress {
+  background: rgba(246, 244, 250, 0.55);
+}
+
+/*
+ * ============================================================================
+ * Section effects used by the premium pass. All are transforms/opacity only,
+ * and every one degrades to nothing under the global reduced-motion clamp.
+ * ============================================================================
+ */
+
+/* Display-type marquee: alternating solid and outlined words. */
+.type-outline {
+  -webkit-text-stroke: 1px #14131a;
+  color: transparent;
+}
+
+/* Micro Ken Burns on the About wipe videos (class applied only when motion is allowed). */
+@keyframes ken-burns {
+  from {
+    transform: scale(1);
+  }
+  to {
+    transform: scale(1.06);
+  }
+}
+.ken-burns {
+  animation: ken-burns 18s ease-in-out infinite alternate;
+}
+
+/* FrameMock terminal caret. */
+@keyframes caret-blink {
+  0%, 49% { opacity: 1; }
+  50%, 100% { opacity: 0; }
+}
+.caret-blink {
+  animation: caret-blink 1.1s step-end infinite;
+}
+
+/* Statement interlude: the slow lamp drifting behind the manifesto. */
+@keyframes glow-drift {
+  0% {
+    transform: translate3d(-8%, 0, 0) scale(1);
+  }
+  50% {
+    transform: translate3d(8%, -6%, 0) scale(1.15);
+  }
+  100% {
+    transform: translate3d(-8%, 0, 0) scale(1);
+  }
+}
+.glow-drift {
+  animation: glow-drift 24s ease-in-out infinite;
+}
+
+/* Architecture: the trace button's label sweeps while the simulation runs. */
+@keyframes shimmer {
+  from {
+    background-position: 200% 0;
+  }
+  to {
+    background-position: -200% 0;
+  }
+}
+.shimmer-label {
+  background: linear-gradient(90deg, currentColor 40%, rgba(255, 255, 255, 0.85) 50%, currentColor 60%);
+  background-size: 200% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: shimmer 1.6s linear infinite;
+}
+
+/* Footer clock colon. */
+.clock-blink {
+  animation: caret-blink 1.6s step-end infinite;
+}
+
+/* ── Mascot ─────────────────────────────────────────────────────────────────
+   The 3D figure on a rail along the bottom edge. --rail is 0 when About reaches
+   the sample line and 1 by the Footer; the runner slides between those two. The
+   component refuses to mount below 900px, which makes the display rule at the
+   bottom a backstop rather than the gate. */
+
+.mascot-root {
+  position: fixed;
+  right: 0;
+  bottom: 8px;
+  left: 0;
+  z-index: 30;
+  height: 216px;
+  pointer-events: none;
+  transition: opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Off the rail — above About and below Contact. Faded, not unmounted, so the WebGL
+   context and the 375 KB model survive the round trip. */
+.mascot-root.is-off {
+  opacity: 0;
+}
+
+/* The part that moves: 200px wide, 24px of clear margin at the left and enough at
+   the right to stop him under the WhatsApp button, which sits on top at z-40.
+   `left` belongs to the rail and `transform` to the dodge, so the two stack instead
+   of fighting — --dodge is a px number written by utils/dodge.js. */
+.mascot-runner {
+  position: absolute;
+  bottom: 0;
+  left: calc(24px + var(--rail, 0) * (100vw - 320px));
+  transform: translateX(calc(var(--dodge, 0) * 1px));
+  width: 200px;
+  height: 216px;
+}
+
+/* The WebGL plate. Sized, not intrinsic — the canvas fills its parent and a skinned
+   mesh has no natural dimensions. */
+.mascot-plate {
+  position: relative;
+  width: 200px;
+  height: 216px;
+}
+
+/* Speech cloud. Keyed per section in Mascot.jsx, so the pop replays at every stop. */
+.mascot-cloud {
+  position: absolute;
+  bottom: calc(100% + 2px);
+  left: 50%;
+  width: max-content;
+  max-width: 236px;
+  margin: 0;
+  padding: 11px 15px;
+  border-radius: 18px 20px 18px 22px;
+  background: #ffffff;
+  box-shadow:
+    0 2px 4px rgba(20, 19, 26, 0.05),
+    0 22px 44px -28px rgba(20, 19, 26, 0.32);
+  color: #14131a;
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-size: 0.8125rem;
+  line-height: 1.45;
+  text-align: center;
+  transform: translateX(-50%);
+  animation: mascot-pop 0.42s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
+
+/* Two dots trailing from the cloud down to his head. */
+.mascot-cloud::after {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  width: 12px;
+  height: 12px;
+  margin-top: 3px;
+  margin-left: -6px;
+  border-radius: 50%;
+  background: #ffffff;
+  box-shadow: 0 11px 0 -3px #ffffff;
+}
+
+@keyframes mascot-pop {
+  from {
+    opacity: 0;
+    transform: translate(-50%, 10px) scale(0.82);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, 0) scale(1);
+  }
+}
+
+@media (max-width: 899px) {
+  .mascot-root {
+    display: none;
+  }
+}
+

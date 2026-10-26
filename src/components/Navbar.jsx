@@ -1,112 +1,214 @@
-import React,{useEffect,useState} from 'react'
-import {Link} from 'react-router-dom'
-import {styles} from '../style'
-import {navLinks} from '../constants/index'
-import {logo,menu,close} from '../assets'
+import { useEffect, useState } from 'react'
+import { motion, useScroll, useSpring } from 'framer-motion'
 
-const GithubIcon = () => (
-  <svg width='20' height='20' viewBox='0 0 24 24' fill='currentColor'><path d='M12 2C6.48 2 2 6.48 2 12c0 4.42 2.87 8.17 6.84 9.5.5.09.68-.22.68-.48v-1.7c-2.78.6-3.37-1.34-3.37-1.34-.45-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.89 1.53 2.34 1.09 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.94 0-1.09.39-1.98 1.03-2.68-.1-.25-.45-1.27.1-2.65 0 0 .84-.27 2.75 1.02.8-.22 1.65-.33 2.5-.33.85 0 1.7.11 2.5.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.38.2 2.4.1 2.65.64.7 1.03 1.59 1.03 2.68 0 3.84-2.34 4.69-4.57 4.94.36.31.68.92.68 1.85v2.74c0 .27.18.58.69.48A10.02 10.02 0 0 0 22 12c0-5.52-4.48-10-10-10z'/></svg>
-)
-const LinkedinIcon = () => (
-  <svg width='20' height='20' viewBox='0 0 24 24' fill='currentColor'><path d='M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14zM8.34 17V10.2H6.1V17h2.24zM7.22 9.24a1.3 1.3 0 1 0 0-2.6 1.3 1.3 0 0 0 0 2.6zM18 17v-3.73c0-2-.43-3.53-2.76-3.53-1.12 0-1.87.61-2.18 1.2h-.03v-1.01H10.9V17h2.24v-3.36c0-.89.17-1.75 1.27-1.75 1.08 0 1.1 1.01 1.1 1.81V17H18z'/></svg>
-)
-
-const socials = [
-  { name: 'GitHub', url: 'https://github.com/jahanzaib0013-a11y', Icon: GithubIcon },
-  { name: 'LinkedIn', url: 'https://linkedin.com/in/jahanzaib-iftikhar-227298223', Icon: LinkedinIcon },
-]
+import { styles } from '../style'
+import { navLinks } from '../constants/index'
+import { SOCIALS } from './icons/SocialIcons'
 
 const Navbar = () => {
-  const [active,setActive]=useState('')
-  const[toggle,setToggle]=useState(false)
+  const [active, setActive] = useState('')
+  const [toggle, setToggle] = useState(false)
+  const [scrolled, setScrolled] = useState(false)
+
+  // The header strip is 64px; anything living inside it gets to pick the
+  // navbar's palette. The hero already dims the room itself (`house-dark`,
+  // written by TheaterScreen); this does the same for the standing dark
+  // sections. A count, not a some(): two dark moments can brush the strip
+  // together across a boundary — the class lifts only when none do.
+  useEffect(() => {
+    const nodes = document.querySelectorAll("[data-tone='dark']")
+    if (!nodes.length) return
+
+    // One rAF-throttled subscription (shared helper — same one the stages use).
+    let raf = 0
+    const measure = () => {
+      let under = 0
+      nodes.forEach((n) => {
+        const rect = n.getBoundingClientRect()
+        // Overlaps the header band [0, 64)?
+        if (rect.top < 64 && rect.bottom > 0) under += 1
+      })
+      document.documentElement.classList.toggle('inverted', under > 0)
+      raf = 0
+    }
+    const onScroll = () => {
+      if (!raf) raf = window.requestAnimationFrame(measure)
+    }
+    measure()
+    window.addEventListener('scroll', onScroll, { passive: true })
+    window.addEventListener('resize', onScroll)
+    return () => {
+      if (raf) window.cancelAnimationFrame(raf)
+      window.removeEventListener('scroll', onScroll)
+      window.removeEventListener('resize', onScroll)
+      // Leave no residue for the hero's own mechanism to fight with.
+      document.documentElement.classList.remove('inverted')
+    }
+  }, [])
+
+  // 1px progress hairline. A light spring keeps it fluid without a rAF of its own.
+  const { scrollYProgress } = useScroll()
+  const progress = useSpring(scrollYProgress, { stiffness: 140, damping: 30, mass: 0.3 })
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 8)
+    onScroll()
+    window.addEventListener('scroll', onScroll, { passive: true })
+    return () => window.removeEventListener('scroll', onScroll)
+  }, [])
+
+  useEffect(() => {
+    const sections = navLinks
+      .map((nav) => document.getElementById(nav.id))
+      .filter(Boolean)
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const visible = entries
+          .filter((entry) => entry.isIntersecting)
+          .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0]
+        if (visible) {
+          const match = navLinks.find((nav) => nav.id === visible.target.id)
+          if (match) setActive(match.title)
+        }
+      },
+      { rootMargin: '-72px 0px -55% 0px', threshold: [0.15, 0.5] }
+    )
+
+    sections.forEach((section) => observer.observe(section))
+    return () => observer.disconnect()
+  }, [])
+
   return (
-    <nav
-    className={`${styles.paddingX} w-full flex items-center py-5 fixed top-0 z-20 bg-primary`}>
-      <div className='w-full flex justify-between items-center max-w-7xl mx-auto'>
+    <header
+      className={`fixed top-0 left-0 right-0 z-40 transition-all duration-300 ease-out ${
+        scrolled ? 'bg-paper/95 backdrop-blur-sm border-b border-rule' : 'bg-transparent border-b border-transparent'
+      }`}
+    >
+      <nav className={`${styles.shell} ${styles.paddingX} flex justify-between items-center h-16`}>
         <a
           href={import.meta.env.BASE_URL}
-          className='items-center flex gap-2'
-          onClick={(e)=>{
+          className='flex items-baseline gap-2.5 group'
+          onClick={(e) => {
             e.preventDefault()
-            setActive("")
-            window.scrollTo(0,0)
-          }}>
-            <img src={logo} alt="logo" className='w-9 h-9 object-contain'></img>
-            <p className='text-white text-[18px] font-bold cursor-pointer flex'>
-              Jahanzaib &nbsp;
-             <span className='sm:block hiddensrc/assets/jahanzaib-high-resolution-logo.png'>| Hero Dev</span>
-             </p>
+            setActive('')
+            window.scrollTo({ top: 0, behavior: 'smooth' })
+          }}
+        >
+          <span className='font-display text-[0.9375rem] font-bold tracking-[-0.01em] text-ink'>
+            Jahanzaib
+          </span>
+          <span className='hidden xs:inline font-mono text-eyebrow uppercase text-mute group-hover:text-blueprint transition-colors duration-200'>
+            AI Engineer
+          </span>
         </a>
-        <div className='hidden sm:flex flex-row items-center gap-8'>
-          <ul className='list-none flex flex-row gap-8'>
-            {navLinks.map((nav) => (
-              <li
-                key={nav.id}
-                className={`${
-                  active === nav.title ? "text-white" : "text-secondary"
-                } hover:text-white text-[18px] font-medium cursor-pointer`}
-                onClick={() => setActive(nav.title)}
-              >
-                <a href={`#${nav.id}`}>{nav.title}</a>
+
+        {/* Desktop links */}
+        <ul className='hidden lg:flex items-center gap-8'>
+          {navLinks.map((nav) => {
+            const isActive = active === nav.title
+            return (
+              <li key={nav.id}>
+                <a
+                  href={`#${nav.id}`}
+                  onClick={() => setActive(nav.title)}
+                  aria-current={isActive ? 'true' : undefined}
+                  className={`relative font-mono text-eyebrow uppercase pb-1 transition-colors duration-200 ${
+                    isActive ? 'text-ink' : 'text-mute hover:text-ink'
+                  }`}
+                >
+                  {nav.title}
+                  <span
+                    className={`absolute left-0 -bottom-px h-px w-full origin-left bg-blueprint transition-transform duration-200 ease-out ${
+                      isActive ? 'scale-x-100' : 'scale-x-0'
+                    }`}
+                    aria-hidden='true'
+                  />
+                </a>
               </li>
-            ))}
-          </ul>
-          <div className='flex items-center gap-2 pl-2 border-l border-white/10'>
-            {socials.map(({ name, url, Icon }) => (
+            )
+          })}
+        </ul>
+
+        {/* Desktop right */}
+        <div className='hidden lg:flex items-center gap-5'>
+          <span className='inline-flex items-center gap-2 font-mono text-eyebrow uppercase text-graphite'>
+            <span className='w-1.5 h-1.5 rounded-full bg-flare animate-pulse' aria-hidden='true' />
+            Available
+          </span>
+          <div className='flex items-center gap-3 pl-5 border-l border-rule text-graphite'>
+            {SOCIALS.map(({ name, url, Icon }) => (
               <a
                 key={name}
                 href={url}
                 target='_blank'
                 rel='noreferrer'
-                title={name}
                 aria-label={name}
-                className='w-9 h-9 flex items-center justify-center rounded-full border border-white/10 text-secondary transition-colors hover:text-white hover:border-[#915eff] hover:bg-[#915eff]/15'
+                className='transition-colors duration-200 hover:text-blueprint'
               >
                 <Icon />
               </a>
             ))}
           </div>
         </div>
-              <div className='sm:hidden flex flex-1 justify-end items-center'>
-              <img src={toggle?close:menu}
-              alt='menu'
-              className='w-[28px] h-[28px]
-              object-contain cursor-pointer'
-              onClick={()=>setToggle(!toggle)}/>
-              <div className={`${!toggle?"hidden":"flex p-6 black-gradient absolute top-20 right-0 mx-4 my-2 min-w-[140px] z-10 rounded-xl"}`}>
-                <ul className='list-none flex justify-end items-start flex-col gap-4'>
-          {navLinks.map((nav) => (
-            <li
-              key={nav.id}
-              className={`${
-                active === nav.title ? "text-white" : "text-secondary"
-              } font-poppins font-medium text-[16px] cursor-pointer`}
-              onClick={() => {setToggle(!toggle); setActive(Link.title)}}
-            >
-              <a href={`#${nav.id}`}>{nav.title}</a>
-            </li>
-          ))}
-          <li className='flex items-center gap-3 pt-2 mt-1 border-t border-white/10 w-full'>
-            {socials.map(({ name, url, Icon }) => (
-              <a
-                key={name}
-                href={url}
-                target='_blank'
-                rel='noreferrer'
-                aria-label={name}
-                className='w-9 h-9 flex items-center justify-center rounded-full border border-white/10 text-secondary hover:text-white hover:border-[#915eff]'
-              >
-                <Icon />
-              </a>
-            ))}
-          </li>
-        </ul>
-              </div>
-              </div>
-              
 
-      </div>
-    </nav>
+        {/* Mobile */}
+        <div className='lg:hidden'>
+          <button
+            type='button'
+            onClick={() => setToggle(!toggle)}
+            aria-label={toggle ? 'Close menu' : 'Open menu'}
+            aria-expanded={toggle}
+            className='w-10 h-10 -mr-2 flex flex-col items-center justify-center gap-[5px] text-ink'
+          >
+            <span className={`block w-[18px] h-px bg-current transition-transform duration-200 ${toggle ? 'rotate-45 translate-y-[3px]' : ''}`} />
+            <span className={`block w-[18px] h-px bg-current transition-transform duration-200 ${toggle ? '-rotate-45 -translate-y-[3px]' : ''}`} />
+          </button>
+        </div>
+      </nav>
+
+      {/* Scroll-progress hairline under the fixed header — the page telling you how far in it is,
+          without a scrollbar's coarseness. Inverts with the room. */}
+      <motion.div
+        aria-hidden='true'
+        className='scroll-progress absolute left-0 bottom-0 h-px w-full origin-left'
+        style={{ scaleX: progress }}
+      />
+
+      {toggle && (
+        <div className='lg:hidden bg-paper border-t border-rule nav-mobile-panel'>
+          <ul className={`${styles.shell} ${styles.paddingX} py-2`}>
+            {navLinks.map((nav) => (
+              <li key={nav.id} className='border-b border-rule last:border-b-0'>
+                <a
+                  href={`#${nav.id}`}
+                  onClick={() => {
+                    setToggle(false)
+                    setActive(nav.title)
+                  }}
+                  className='block py-4 font-mono text-label uppercase text-ink'
+                >
+                  {nav.title}
+                </a>
+              </li>
+            ))}
+          </ul>
+          <div className={`${styles.shell} ${styles.paddingX} py-4 flex items-center justify-between border-t border-rule`}>
+            <span className='inline-flex items-center gap-2 font-mono text-eyebrow uppercase text-graphite'>
+              <span className='w-1.5 h-1.5 rounded-full bg-flare animate-pulse' aria-hidden='true' />
+              Available for roles
+            </span>
+            <div className='flex items-center gap-4 text-graphite'>
+              {SOCIALS.map(({ name, url, Icon }) => (
+                <a key={name} href={url} target='_blank' rel='noreferrer' aria-label={name}>
+                  <Icon />
+                </a>
+              ))}
+            </div>
+          </div>
+        </div>
+      )}
+    </header>
   )
 }
 
