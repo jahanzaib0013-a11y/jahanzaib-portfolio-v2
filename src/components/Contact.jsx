@@ -10,11 +10,8 @@ const Contact = () => {
   const EMAIL = "jahanzaib0013@gmail.com";
   const PHONE = "+923184129599";
   const PHONE_DISPLAY = "+92 318 4129599";
-  const meetBody = encodeURIComponent(
-    "Hi Jahanzaib,\n\nI'd like to book an interview. A few times that work for me:\n- \n- \n\nLooking forward to it!"
-  );
-  const meetHref = `mailto:${EMAIL}?subject=${encodeURIComponent("Interview request (Google Meet)")}&body=${meetBody}`;
-  const zoomHref = `mailto:${EMAIL}?subject=${encodeURIComponent("Interview request (Zoom)")}&body=${meetBody}`;
+  const CAL = "https://cal.com/jahan-zaib-hbyjx4";
+  const cal30 = `${CAL}/30min`;
   const emailHref = `mailto:${EMAIL}?subject=${encodeURIComponent("Hello Jahanzaib")}`;
 
   const Icon = ({ d }) => (
@@ -43,15 +40,12 @@ const Contact = () => {
               </span>
               <div>
                 <p className='text-white font-semibold text-[16px]'>Book an Interview</p>
-                <p className='text-secondary text-[13px]'>Google Meet or Zoom — I'll send a calendar invite.</p>
+                <p className='text-secondary text-[13px]'>Pick a time that works — you'll get a calendar invite with a video-call link.</p>
               </div>
             </div>
             <div className='mt-4 flex flex-wrap gap-3'>
-              <a href={meetHref} className='flex items-center gap-2 px-4 h-10 rounded-full bg-[#915eff] text-white text-[13.5px] font-semibold transition-transform hover:scale-105'>
-                <span className='w-2 h-2 rounded-full bg-green-300'/> Google Meet
-              </a>
-              <a href={zoomHref} className='flex items-center gap-2 px-4 h-10 rounded-full bg-white/10 border border-white/15 text-white text-[13.5px] font-semibold transition-colors hover:bg-white/20'>
-                <span className='w-2 h-2 rounded-full bg-[#2D8CFF]'/> Zoom
+              <a href={cal30} target='_blank' rel='noreferrer' className='flex items-center gap-2 px-4 h-10 rounded-full bg-[#915eff] text-white text-[13.5px] font-semibold transition-transform hover:scale-105'>
+                <span className='w-2 h-2 rounded-full bg-green-300'/> Book a 30-min Interview
               </a>
             </div>
           </div>

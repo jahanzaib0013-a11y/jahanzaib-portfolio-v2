@@ -18,8 +18,19 @@ const ProjectModal=({project,onClose,onPrev,onNext})=>{
     document.body.style.overflow='hidden';
     return ()=>{ window.removeEventListener('keydown',onKey); document.body.style.overflow=''; };
   },[onClose,onPrev,onNext]);
+  const [rating, setRating] = React.useState(0);
+  const [hover, setHover] = React.useState(0);
+  const [comment, setComment] = React.useState('');
+  const [sent, setSent] = React.useState(false);
+  React.useEffect(()=>{ setRating(0); setHover(0); setComment(''); setSent(false); }, [project && project.name]);
   if(!project) return null;
   const {name,description,tags,image,video,source_code_link,live_demo_link,highlights} = project;
+  const sendFeedback = () => {
+    const subject = `Portfolio feedback: ${name}${rating ? ` — ${rating}★` : ''}`;
+    const body = `Project: ${name}\nRating: ${rating ? `${rating}/5 stars` : '(not rated)'}\n\nFeedback:\n${comment || '(no comment)'}`;
+    window.open(`mailto:jahanzaib0013@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`, '_blank');
+    setSent(true);
+  };
   return(
     <motion.div
       initial={{opacity:0}} animate={{opacity:1}} exit={{opacity:0}}
@@ -98,6 +109,30 @@ const ProjectModal=({project,onClose,onPrev,onNext})=>{
                 #{tag.name}
               </span>
             ))}
+          </div>
+
+          {/* star feedback */}
+          <div className='mt-6 pt-6 border-t border-white/5'>
+            <p className='text-white font-semibold text-[15px]'>Rate this project</p>
+            <p className='text-secondary text-[13px] mt-1'>Tap the stars and leave a note — your feedback comes straight to me.</p>
+            <div className='mt-3 flex items-center gap-1.5'>
+              {[1,2,3,4,5].map((n)=>(
+                <button key={n}
+                  onClick={()=>{setRating(n); setSent(false);}}
+                  onMouseEnter={()=>setHover(n)} onMouseLeave={()=>setHover(0)}
+                  aria-label={`${n} star${n>1?'s':''}`}
+                  className='text-[28px] leading-none transition-transform hover:scale-125 cursor-pointer'
+                  style={{ color: (hover||rating) >= n ? '#ffc93c' : '#3a3a52' }}>★</button>
+              ))}
+              {rating>0 && <span className='ml-2 text-secondary text-[13px]'>{rating}/5</span>}
+            </div>
+            <textarea value={comment} onChange={(e)=>{setComment(e.target.value); setSent(false);}} rows={2}
+              placeholder='Optional — what did you think?'
+              className='mt-3 w-full bg-primary border border-white/10 rounded-lg p-3 text-white text-[14px] placeholder:text-secondary outline-none focus:border-[#915eff] resize-none' />
+            <button onClick={sendFeedback} disabled={!rating && !comment.trim()}
+              className='mt-3 px-5 h-10 rounded-full bg-[#915eff] text-white text-[14px] font-semibold transition-transform hover:scale-105 disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:scale-100'>
+              {sent ? 'Thanks for the feedback! ✓' : 'Send Feedback'}
+            </button>
           </div>
         </div>
       </motion.div>
